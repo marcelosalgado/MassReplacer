@@ -1,5 +1,5 @@
 '''
-I wanted to search and replace lots of time, so I created this.
+I wanted to search and replace a lot, so I created this.
 
 @author: Marcelo Salgado <msscelo@gmail.com>
 @license: MIT (http://www.opensource.org/licenses/mit-license.php)
@@ -10,6 +10,8 @@ import sublime_plugin
 
 class MassReplaceCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
+		# trailling spaces is another plugin.
+		self.view.run_command("delete_trailing_spaces")
 		searcheddos = {
 			"\)[\s\n\t]*\{" : ") {",
 			"else[ \n\t]*\{": "else {",
@@ -17,7 +19,10 @@ class MassReplaceCommand(sublime_plugin.TextCommand):
 			"for\("         : "for (",
 			"foreach\("     : "foreach (",
 			"while\("       : "while (",
-			"if\("          : "if ("
+			"if\("          : "if (",
+			"<\?[ ]"        : "<?php ",
+			"<\?[\t]"       : "<?php	",
+			"<\?[\n]"       : "<?php\n",
 			# add more here
 		}
 		modifications = 0
